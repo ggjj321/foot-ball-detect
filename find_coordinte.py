@@ -1,11 +1,9 @@
-from nis import match
 import cv2
 import torch
 import numpy as np 
 import math
 
 # goal_area[0]:xmin goal_area[1]:xmax goal_area[2]:ymin goal_area[3]:ymax
-# need modify
 def in_goal_area(horn_point, goal_area): 
   horn_x_min = horn_point[0]
   horn_x_max = horn_point[1]
@@ -64,16 +62,16 @@ def create_white_image(frame_height, frame_width):
   return origin_img
     
 # Model
-model = torch.hub.load('ultralytics/yolov5', 'custom', path='yolov5/runs/train/exp11/weights/best.pt')
+model = torch.hub.load('ultralytics/yolov5', 'custom', path='weights/best.pt')
 
-cap = cv2.VideoCapture('yolov5/data/video/soccer5.mp4')
+cap = cv2.VideoCapture('detect_video.mp4')
 
 frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 
 res = (frame_width, frame_height) 
 fourcc = cv2.VideoWriter_fourcc(*'MP4V')
-videowrite = cv2.VideoWriter('video.mp4', fourcc, 20.0, res)
+videowrite = cv2.VideoWriter('result_video.mp4', fourcc, 20.0, res)
 
 # save whole coordinate to avoid hoen hidden
 goal_upper_left_x  = []
