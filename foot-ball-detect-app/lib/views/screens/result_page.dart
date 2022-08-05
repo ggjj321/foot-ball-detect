@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import '../widgets/barchart.dart';
-import '../widgets/wave_clip.dart';
+import '../widgets/wave_appbar.dart';
 import '../widgets/goal_painter.dart';
 import '../widgets/gradient_render.dart';
 
@@ -13,44 +13,12 @@ class ResultPage extends StatelessWidget {
     var screenWidth = MediaQuery.of(context).size.width;
     var screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(kToolbarHeight + 45),
-          child: ClipPath(
-            clipper: WaveClip(),
-            child: Container(
-              decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                      colors: [
-                    Colors.blue,
-                    Colors.purple,
-                  ])),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children:const [
-                  SizedBox(
-                    height: 13,
-                  ),
-                  Text(
-                    'Result Page',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 40,
-                      color: Colors.white
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          )),
+      appBar: waveAppbar("Result Page"),
       body: SingleChildScrollView(
-
         child: AnimationLimiter(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: AnimationConfiguration.toStaggeredList(
-              duration: const Duration(milliseconds: 375),
+              duration: const Duration(milliseconds: 750),
               childAnimationBuilder: (widget) => SlideAnimation(
                 horizontalOffset: 50.0,
                 child: FadeInAnimation(
@@ -87,11 +55,11 @@ class ResultPage extends StatelessWidget {
                     ],
                   ),
                   child: CustomPaint(
-                    foregroundPainter: GoalPainter(0.4, 0.2),
+                    foregroundPainter: GoalPainter.resultMode(0.4, 0.2),
                   ),
                 ),
                 SizedBox(
-                  height: screenHeight * 0.03,
+                  height: screenHeight * 0.05,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

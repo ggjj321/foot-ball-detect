@@ -2,17 +2,22 @@ import 'package:flutter/material.dart';
 import 'gradient_render.dart';
 
 class GoalPainter extends CustomPainter {
-  late double centerX;
-  late double centerY;
+  double? centerX;
+  double? centerY;
+  late bool isResultMode;
 
-  GoalPainter(double x, double y){
+  GoalPainter.resultMode(double x, double y){
     centerX = x;
     centerY = y;
+    isResultMode = true;
+  }
+
+  GoalPainter.uploadMode(){
+    isResultMode = false;
   }
 
   @override
   void paint(Canvas canvas, Size size) {
-    final center = Offset(size.width * centerX, size.height * centerY);
     final paint = Paint()
       ..color = Colors.purpleAccent
       ..strokeCap = StrokeCap.round
@@ -22,11 +27,14 @@ class GoalPainter extends CustomPainter {
           Colors.purple, Colors.blue, 0, 300
       );
 
-    canvas.drawCircle(
-      center,
-      size.height * 1 / 20,
-      paint,
-    );
+    if(isResultMode){
+      final center = Offset(size.width * centerX!, size.height * centerY!);
+      canvas.drawCircle(
+        center,
+        size.height * 1 / 20,
+        paint,
+      );
+    }
 
     canvas.drawLine(
       Offset(0, size.height * 1 / 3),
