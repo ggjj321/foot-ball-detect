@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-
+import '../../services/goal_field_service.dart';
+import '../../services/video_service.dart';
 import 'result_page.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/goal_painter.dart';
 import '../widgets/gradient_render.dart';
@@ -14,6 +16,7 @@ class UploadVideoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
     var screenHeight = MediaQuery.of(context).size.height;
+    // context.read<VideoService>().reload();
     return Scaffold(
         appBar: waveAppbar("Upload Video Page"),
         body: SingleChildScrollView(
@@ -29,7 +32,7 @@ class UploadVideoPage extends StatelessWidget {
                           ),
                       children: [
                 SizedBox(
-                  height: screenHeight * 0.1,
+                  height: screenHeight * 0.07,
                 ),
                 Text(
                   textAlign: TextAlign.center,
@@ -41,7 +44,7 @@ class UploadVideoPage extends StatelessWidget {
                             Colors.purple, Colors.blue, 0, 350)),
                 ),
                 SizedBox(
-                  height: screenHeight * 0.03,
+                  height: screenHeight * 0.05,
                 ),
                 Container(
                   height: screenHeight * 0.2,
@@ -71,19 +74,26 @@ class UploadVideoPage extends StatelessWidget {
                                       width: screenWidth * 0.225,
                                       child: Center(
                                           child: TextButton(
-                                        onPressed: () {},
-                                        child: Text(
-                                          'choose',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              foreground: Paint()
-                                                ..shader = getLinearGradient(
-                                                    Colors.purple,
-                                                    Colors.blue,
-                                                    0 + 250.0 * x,
-                                                    300 + 120.0 * x)),
-                                        ),
+                                        onPressed: () => context
+                                            .read<GoalFieldService>()
+                                            .pressField(y, x),
+                                        child: Consumer<GoalFieldService>(
+                                            builder: (context, galFieldService,
+                                                    child) =>
+                                                Text(
+                                                  galFieldService.getFieldStatusToString(y, x),
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                      fontSize: 20,
+                                                      foreground: Paint()
+                                                        ..shader =
+                                                            getLinearGradient(
+                                                                Colors.purple,
+                                                                Colors.blue,
+                                                                0 + 250.0 * x,
+                                                                300 +
+                                                                    120.0 * x)),
+                                                )),
                                       )))
                               ],
                             )
@@ -91,46 +101,71 @@ class UploadVideoPage extends StatelessWidget {
                       )),
                 ),
                 SizedBox(
-                  height: screenHeight * 0.03,
+                  height: screenHeight * 0.05,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'Choose Video',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 20,
-                            foreground: Paint()
-                              ..shader = getLinearGradient(
-                                  Colors.purple, Colors.blue, 0, 150)),
-                      ),
+                    Column(
+                      children: [
+                        Text(
+                          'Choose Video',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 20,
+                              foreground: Paint()
+                                ..shader = getLinearGradient(
+                                    Colors.purple, Colors.blue, 0, 150)),
+                        ),
+                        SizedBox(
+                          height: screenHeight * 0.03,
+                        ),
+                        IconButton(
+                          iconSize: 50,
+                          icon: const Icon(
+                            Icons.file_open,
+                          ),
+                          tooltip: 'Choose Video',
+                          onPressed: () => context
+                              .read<VideoService>()
+                              .selectDetectVideoFromGallery(),
+                        ),
+                      ],
                     ),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'Use Camera',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 20,
-                            foreground: Paint()
-                              ..shader = getLinearGradient(
-                                  Colors.blue, Colors.purple, 150, 300)),
-                      ),
+                    Column(
+                      children: [
+                        Text(
+                          'Use Camera',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 20,
+                              foreground: Paint()
+                                ..shader = getLinearGradient(
+                                    Colors.blue, Colors.purple, 150, 300)),
+                        ),
+                        SizedBox(
+                          height: screenHeight * 0.03,
+                        ),
+                        IconButton(
+                            iconSize: 50,
+                            icon: const Icon(Icons.camera),
+                            tooltip: 'Use Camera',
+                            onPressed: () => context
+                                .read<VideoService>()
+                                .takeVideoFromCamera())
+                      ],
                     )
                   ],
                 ),
                 SizedBox(
-                  height: screenHeight * 0.08,
+                  height: screenHeight * 0.05,
                 ),
                 TextButton(
                   onPressed: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const ResultPage()));
+                            builder: (context) => const ResultPageView()));
                   },
                   child: Text(
                     'Submit to See Result',
@@ -141,7 +176,20 @@ class UploadVideoPage extends StatelessWidget {
                           ..shader = getLinearGradient(
                               Colors.blue, Colors.purple, 0, 300)),
                   ),
-                )
+                ),
+                SizedBox(
+                  height: screenHeight * 0.05,
+                ),
+                Consumer<VideoService>(
+                    builder: (context, videoService, child) => Text(
+                          videoService.videoStatus,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 15,
+                              foreground: Paint()
+                                ..shader = getLinearGradient(
+                                    Colors.blue, Colors.purple, 0, 300)),
+                        )),
               ]))),
         ));
   }

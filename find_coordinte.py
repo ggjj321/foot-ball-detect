@@ -96,6 +96,7 @@ while cap.isOpened():
   goal_area = []
 
   for i in range(len(df)):
+    print(df)
     if df.at[i, 'name'] == 'soccer' and float(df.at[i, 'confidence']) > 0.4:
       boal_area = get_coordinte(df, i)
       start_point = (boal_area[0], boal_area[2])
