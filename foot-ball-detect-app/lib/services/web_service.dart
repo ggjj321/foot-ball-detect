@@ -15,7 +15,7 @@ class WebService {
   }
 
   void sendDetectVideo() async{
-    String method = 'find_coordinate';
+    const String method = 'find_coordinate';
     final uri = Uri.parse(url + method);
     var request = http.MultipartRequest('POST', uri);
     File? detectVideo = await selectDetectVideo();

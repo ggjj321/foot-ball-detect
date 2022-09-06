@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'gradient_render.dart';
 
 class GoalPainter extends CustomPainter {
-  double? centerX;
-  double? centerY;
+  late double? centerX;
+  late double? centerY;
   late bool isResultMode;
 
   GoalPainter.resultMode(double x, double y){

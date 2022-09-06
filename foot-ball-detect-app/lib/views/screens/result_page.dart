@@ -8,12 +8,12 @@ import '../widgets/goal_painter.dart';
 import '../widgets/gradient_render.dart';
 
 class ResultPageView extends StatelessWidget {
-  const ResultPageView({Key? key}) : super(key: key);
+  const ResultPageView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var screenWidth = MediaQuery.of(context).size.width;
-    var screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: waveAppbar("Result Page"),
       body: SingleChildScrollView(
@@ -51,7 +51,7 @@ class ResultPageView extends StatelessWidget {
                           color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 5,
                           blurRadius: 7,
-                          offset: Offset(0, 3), // changes position of shadow
+                          offset: const Offset(0, 3), // changes position of shadow
                         ),
                       ],
                     ),
@@ -97,7 +97,7 @@ class ResultPageView extends StatelessWidget {
                                 spreadRadius: 5,
                                 blurRadius: 7,
                                 offset:
-                                    Offset(0, 3), // changes position of shadow
+                                    const Offset(0, 3), // changes position of shadow
                               ),
                             ],
                           ),
@@ -136,7 +136,7 @@ class ResultPageView extends StatelessWidget {
                                 spreadRadius: 5,
                                 blurRadius: 7,
                                 offset:
-                                    Offset(0, 3), // changes position of shadow
+                                    const Offset(0, 3), // changes position of shadow
                               ),
                             ],
                           ),

@@ -10,12 +10,12 @@ import '../widgets/gradient_render.dart';
 import '../widgets/wave_appbar.dart';
 
 class UploadVideoPage extends StatelessWidget {
-  const UploadVideoPage({Key? key}) : super(key: key);
+  const UploadVideoPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var screenWidth = MediaQuery.of(context).size.width;
-    var screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     // context.read<VideoService>().reload();
     return Scaffold(
         appBar: waveAppbar("Upload Video Page"),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class WaveClip extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
-    Path path = new Path();
+    Path path = Path();
     final lowPoint = size.height - 30;
     final highPoint = size.height - 60;
     path.lineTo(0, size.height);
