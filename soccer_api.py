@@ -331,7 +331,7 @@ def detect_video_to_calculate_data(targets):
 
     
         
-# score, coordinate_x, coordinate_y = detect_video_to_calculate_data([1, 2])
-# print(score, coordinate_x, coordinate_y)
+score, coordinate_x, coordinate_y = detect_video_to_calculate_data([1, 2])
+print(score, coordinate_x, coordinate_y)
 # python_dict = {"shoot in": shoot_in}
 # j = json.dumps(python_dict, indent = 4)
