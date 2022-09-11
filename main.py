@@ -1,11 +1,11 @@
 from fastapi import FastAPI, File, UploadFile
+import soccer_api
 
 
 app = FastAPI()
 
 @app.post("/find_coordinate")
 async def find_coordinate(target_squares: str, detect_video: UploadFile):
-    detect_video_to_calculate_data([1, 2, 3])
     return {"message": "Hello World"}
 
 
