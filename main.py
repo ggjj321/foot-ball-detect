@@ -6,7 +6,8 @@ app = FastAPI()
 
 @app.post("/find_coordinate")
 async def find_coordinate(target_squares: str, detect_video: UploadFile):
-    return {"message": "Hello World"}
+    score, coordinate_x, coordinate_y = detect_video_to_calculate_data(target_squares)
+    return {"score": score, "coordinate_x": coordinate_x, "coordinate_y": coordinate_y}
 
 
 @app.get("/")
