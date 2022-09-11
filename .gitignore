@@ -1,7 +1,5 @@
 __pycache__/
 test_video/
 venv/
-weights/
 
-*.mp4
 *.jpg
