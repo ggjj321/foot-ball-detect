@@ -23,4 +23,24 @@ class GoalFieldService extends ChangeNotifier{
       return Colors.white;
     }
   }
+
+  String selectStatusConvertToTargetSquares(){
+    String targetSquares = "";
+    for(int y = 0; y < 3; y++){
+      for(int x = 0; x < 4; x++){
+        if(fieldChooseStatus[y][x]) {
+          int coordinate = 1 + y * 4 + x;
+          targetSquares += "$coordinate,";
+        }
+      }
+    }
+
+    int targetSquaresLength = targetSquares.length;
+
+    if(targetSquares.substring(targetSquaresLength - 1) == ",") {
+      targetSquares = targetSquares.substring(0, targetSquaresLength - 1);
+    }
+
+    return targetSquares;
+  }
 }

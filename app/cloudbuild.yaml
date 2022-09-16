@@ -1,0 +1,5 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'gcr.io/foot-ball-fetect-v1/foot-ball-fetect-v1-image', '.' ]
+images:
+- 'gcr.io/foot-ball-fetect-v1/foot-ball-fetect-v1-image'
