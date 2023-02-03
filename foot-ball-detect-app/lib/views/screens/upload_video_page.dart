@@ -20,19 +20,19 @@ class UploadVideoPage extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
     context.read<WebService>().reload();
     return Scaffold(
-        appBar: waveAppbar("Upload Video Page"),
-        body: SingleChildScrollView(
-          child: AnimationLimiter(
-              child: Column(
-                  children: AnimationConfiguration.toStaggeredList(
-                      duration: const Duration(milliseconds: 750),
-                      childAnimationBuilder: (widget) => SlideAnimation(
-                            horizontalOffset: 50.0,
-                            child: FadeInAnimation(
-                              child: widget,
-                            ),
-                          ),
-                      children: [
+      appBar: waveAppbar("Upload Video Page"),
+      body: SingleChildScrollView(
+        child: AnimationLimiter(
+          child: Column(
+            children: AnimationConfiguration.toStaggeredList(
+              duration: const Duration(milliseconds: 750),
+              childAnimationBuilder: (widget) => SlideAnimation(
+                horizontalOffset: 50.0,
+                child: FadeInAnimation(
+                  child: widget,
+                ),
+              ),
+              children: [
                 SizedBox(
                   height: screenHeight * 0.07,
                 ),
@@ -40,10 +40,11 @@ class UploadVideoPage extends StatelessWidget {
                   textAlign: TextAlign.center,
                   'Choose field',
                   style: TextStyle(
-                      fontSize: 20,
-                      foreground: Paint()
-                        ..shader = getLinearGradient(
-                            Colors.purple, Colors.blue, 0, 350)),
+                    fontSize: 20,
+                    foreground: Paint()
+                      ..shader =
+                          getLinearGradient(Colors.purple, Colors.blue, 0, 350),
+                  ),
                 ),
                 SizedBox(
                   height: screenHeight * 0.05,
@@ -59,48 +60,52 @@ class UploadVideoPage extends StatelessWidget {
                         color: Colors.grey.withOpacity(0.5),
                         spreadRadius: 5,
                         blurRadius: 7,
-                        offset: const Offset(0, 3), // changes position of shadow
+                        offset:
+                            const Offset(0, 3), // changes position of shadow
                       ),
                     ],
                   ),
                   child: CustomPaint(
-                      foregroundPainter: GoalPainter.uploadMode(),
-                      child: Column(
-                        children: [
-                          for (int y = 0; y < 3; y++)
-                            Row(
-                              children: [
-                                for (int x = 0; x < 4; x++)
-                                  SizedBox(
-                                      height: screenHeight * 0.0666,
-                                      width: screenWidth * 0.225,
-                                      child: Center(
-                                          child: TextButton(
-                                        onPressed: () => context
-                                            .read<GoalFieldService>()
-                                            .pressField(y, x),
-                                        child: Consumer<GoalFieldService>(
-                                            builder: (context, galFieldService,
-                                                    child) =>
+                    foregroundPainter: GoalPainter.uploadMode(),
+                    child: Column(
+                      children: [
+                        for (int y = 0; y < 3; y++)
+                          Row(
+                            children: [
+                              for (int x = 0; x < 4; x++)
+                                SizedBox(
+                                  height: screenHeight * 0.0666,
+                                  width: screenWidth * 0.225,
+                                  child: Center(
+                                    child: TextButton(
+                                      onPressed: () => context
+                                          .read<GoalFieldService>()
+                                          .pressField(y, x),
+                                      child: Consumer<GoalFieldService>(
+                                        builder:
+                                            (context, galFieldService, child) =>
                                                 Text(
-                                                  galFieldService.getFieldStatusToString(y, x),
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                      fontSize: 20,
-                                                      foreground: Paint()
-                                                        ..shader =
-                                                            getLinearGradient(
-                                                                Colors.purple,
-                                                                Colors.blue,
-                                                                0 + 250.0 * x,
-                                                                300 +
-                                                                    120.0 * x)),
-                                                )),
-                                      )))
-                              ],
-                            )
-                        ],
-                      )),
+                                          galFieldService
+                                              .getFieldStatusToString(y, x),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              foreground: Paint()
+                                                ..shader = getLinearGradient(
+                                                    Colors.purple,
+                                                    Colors.blue,
+                                                    0 + 250.0 * x,
+                                                    300 + 120.0 * x)),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                            ],
+                          ),
+                      ],
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: screenHeight * 0.05,
@@ -114,10 +119,11 @@ class UploadVideoPage extends StatelessWidget {
                           'Choose Video',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontSize: 20,
-                              foreground: Paint()
-                                ..shader = getLinearGradient(
-                                    Colors.purple, Colors.blue, 0, 150)),
+                            fontSize: 20,
+                            foreground: Paint()
+                              ..shader = getLinearGradient(
+                                  Colors.purple, Colors.blue, 0, 150),
+                          ),
                         ),
                         SizedBox(
                           height: screenHeight * 0.03,
@@ -140,21 +146,23 @@ class UploadVideoPage extends StatelessWidget {
                           'Use Camera',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontSize: 20,
-                              foreground: Paint()
-                                ..shader = getLinearGradient(
-                                    Colors.blue, Colors.purple, 150, 300)),
+                            fontSize: 20,
+                            foreground: Paint()
+                              ..shader = getLinearGradient(
+                                  Colors.blue, Colors.purple, 150, 300),
+                          ),
                         ),
                         SizedBox(
                           height: screenHeight * 0.03,
                         ),
                         IconButton(
-                            iconSize: 50,
-                            icon: const Icon(Icons.camera),
-                            tooltip: 'Use Camera',
-                            onPressed: () => context
-                                .read<VideoService>()
-                                .takeVideoFromCamera())
+                          iconSize: 50,
+                          icon: const Icon(Icons.camera),
+                          tooltip: 'Use Camera',
+                          onPressed: () => context
+                              .read<VideoService>()
+                              .takeVideoFromCamera(),
+                        ),
                       ],
                     )
                   ],
@@ -164,39 +172,53 @@ class UploadVideoPage extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () {
-                    File? detectVideo = context.read<VideoService>().detectVideo;
-                    String targetSquares = context.read<GoalFieldService>().selectStatusConvertToTargetSquares();
-                    context.read<WebService>().sendDetectVideo(detectVideo, targetSquares);
+                    File? detectVideo =
+                        context.read<VideoService>().detectVideo;
+                    String targetSquares = context
+                        .read<GoalFieldService>()
+                        .selectStatusConvertToTargetSquares();
+                    context
+                        .read<WebService>()
+                        .sendDetectVideo(detectVideo, targetSquares);
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ResultPageView()));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ResultPageView(),
+                      ),
+                    );
                     context.read<VideoService>().reload();
                   },
                   child: Text(
                     'Submit to See Result',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        fontSize: 30,
-                        foreground: Paint()
-                          ..shader = getLinearGradient(
-                              Colors.blue, Colors.purple, 0, 300)),
+                      fontSize: 30,
+                      foreground: Paint()
+                        ..shader = getLinearGradient(
+                            Colors.blue, Colors.purple, 0, 300),
+                    ),
                   ),
                 ),
                 SizedBox(
                   height: screenHeight * 0.05,
                 ),
                 Consumer<VideoService>(
-                    builder: (context, videoService, child) => Text(
-                          videoService.videoStatus,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 15,
-                              foreground: Paint()
-                                ..shader = getLinearGradient(
-                                    Colors.blue, Colors.purple, 0, 300)),
-                        )),
-              ]))),
-        ));
+                  builder: (context, videoService, child) => Text(
+                    videoService.videoStatus,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 15,
+                      foreground: Paint()
+                        ..shader = getLinearGradient(
+                            Colors.blue, Colors.purple, 0, 300),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
