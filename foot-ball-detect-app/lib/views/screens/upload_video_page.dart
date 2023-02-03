@@ -1,7 +1,9 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import '../../services/goal_field_service.dart';
 import '../../services/video_service.dart';
+import '../../services/web_service.dart';
 import 'result_page.dart';
 import 'package:provider/provider.dart';
 
@@ -16,7 +18,7 @@ class UploadVideoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    // context.read<VideoService>().reload();
+    context.read<WebService>().reload();
     return Scaffold(
         appBar: waveAppbar("Upload Video Page"),
         body: SingleChildScrollView(
@@ -57,7 +59,7 @@ class UploadVideoPage extends StatelessWidget {
                         color: Colors.grey.withOpacity(0.5),
                         spreadRadius: 5,
                         blurRadius: 7,
-                        offset: Offset(0, 3), // changes position of shadow
+                        offset: const Offset(0, 3), // changes position of shadow
                       ),
                     ],
                   ),
@@ -162,10 +164,14 @@ class UploadVideoPage extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () {
+                    File? detectVideo = context.read<VideoService>().detectVideo;
+                    String targetSquares = context.read<GoalFieldService>().selectStatusConvertToTargetSquares();
+                    context.read<WebService>().sendDetectVideo(detectVideo, targetSquares);
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const ResultPageView()));
+                    context.read<VideoService>().reload();
                   },
                   child: Text(
                     'Submit to See Result',

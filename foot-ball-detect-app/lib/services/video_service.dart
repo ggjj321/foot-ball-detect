@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -7,6 +8,7 @@ class VideoService extends ChangeNotifier {
   String successMessage = "U had chosen video";
 
   String get videoStatus  => detectVideoStatus ?? "No any Detect video";
+  File? get detectVideo => video != null ? File(video!.path) : null;
 
   void reload() {
     video = null;
@@ -34,6 +36,4 @@ class VideoService extends ChangeNotifier {
       notifyListeners();
     }
   }
-
-  void postVideoToDetect(){}
 }
